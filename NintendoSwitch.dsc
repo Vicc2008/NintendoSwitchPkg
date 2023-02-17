@@ -25,16 +25,16 @@
   PLATFORM_VERSION               = 0.1
   DSC_SPECIFICATION              = 0x00010005
   OUTPUT_DIRECTORY               = Build/NintendoSwitch-$(ARCH)
-  SUPPORTED_ARCHITECTURES        = AARCH64
+  SUPPORTED_ARCHITECTURES        = ARM
   BUILD_TARGETS                  = DEBUG|RELEASE
   SKUID_IDENTIFIER               = DEFAULT
   FLASH_DEFINITION               = NintendoSwitchPkg/NintendoSwitch.fdf
 
 [BuildOptions.common.EDKII.DXE_RUNTIME_DRIVER]
-  GCC:*_*_AARCH64_DLINK_FLAGS = -z common-page-size=0x10000
+  GCC:*_*_ARM_DLINK_FLAGS = -z common-page-size=0x10000
 
 [BuildOptions.common]
-  GCC:*_*_AARCH64_CC_FLAGS = -Wno-unused-variable
+  GCC:*_*_ARM_CC_FLAGS = -Wno-unused-variable
 
 ################################################################################
 #
@@ -221,9 +221,9 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxAuthVariableSize|0x2800
 
   # An assumption here, according to readelf -a bl31.elf
-  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000
+  gArmTokenSpaceGuid.PcdSystemMemoryBase|0x00000000
   # Sounds like a pretty safe memory configuration:
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0xf0000000
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x40000000
 
   # Manually set the stack
   # Size of the region used by UEFI in permanent memory (Reserved 128MB)
@@ -238,7 +238,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x21, 0xaa, 0x2c, 0x46, 0x14, 0x76, 0x03, 0x45, 0x83, 0x6e, 0x8a, 0xb6, 0xf4, 0x66, 0x23, 0x31 }
   gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|3
 
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"Nintendo Switch AArch64 UEFI"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"NVIDIA Tegra30 UEFI"
   # According to TRM
   # This no longer presents. Just know it is sufficient.
   # gEmbeddedTokenSpaceGuid.PcdPrePiCpuMemorySize|34
@@ -276,10 +276,10 @@
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x800fee0f
   gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0x07
 
-  # Interrupt Controller (arch/arm64/boot/dts/nvidia/tegra210.dtsi)
+  # Interrupt Controller (arch/arm/boot/dts/tegra30.dtsi)
   gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x50041000
   gArmTokenSpaceGuid.PcdGicDistributorBase|0x50041000
-  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0x50042000
+  gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0x50040100
 
   # What the hell is that
   # So Tegra210 has several timer complex?
@@ -297,16 +297,16 @@
   gEfiMdePkgTokenSpaceGuid.PcdPerformanceLibraryPropertyMask|1
 
   # Version Info
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"Little Moe, LLC."
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"WOA32 on Android T30 devices"
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"0.01"
-  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosSystemModel|"Nintendo Switch (HAC-001)"
-  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"NVIDIA Tegra X1"
-  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"HAC-001"
+  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosSystemModel|"ASUS Google Nexus 7"
+  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"NVIDIA Tegra 3 (T30L)"
+  gNintendoSwitchPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"ME370T"
 
   # Display
   # Simple FrameBuffer
-  gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0xf5a00000
-  gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|720
+  gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x54200000
+  gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|800
   gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1280
   gNintendoSwitchPkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32
 
@@ -317,19 +317,6 @@
   # Make VariableRuntimeDxe work at emulated non-volatile variable mode.
   #
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
-
-  # 16550 Serial (UARTB, Right-side Joy-Con)
-  # It is sending garbages now, we comment it out right now
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialDetectCable|FALSE
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialUseMmio|TRUE
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialUseHardwareFlowControl|FALSE
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialBaudRate|115200
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|1843000
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterBase|0x70006040
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterStride|4
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialLineControl|0x03
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialFifoControl|0x07
-  # gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterAccessWidth|8
 
 [Components.common]
   # PEI/SEC

@@ -14,8 +14,8 @@
 #
 #
 
-[FD.TEGRA210_EFI]
-BaseAddress   = 0x80110000|gArmTokenSpaceGuid.PcdFdBaseAddress  #The base address of the FLASH Device.
+[FD.TEGRA30_EFI]
+BaseAddress   = 0x44763600|gArmTokenSpaceGuid.PcdFdBaseAddress  #The base address of the FLASH Device.
 Size          = 0x000E0000|gArmTokenSpaceGuid.PcdFdSize         #The size in bytes of the FLASH Device
 ErasePolarity = 1
 BlockSize     = 0x200

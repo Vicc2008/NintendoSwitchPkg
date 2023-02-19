@@ -147,11 +147,11 @@ SMBIOS_TABLE_TYPE1 mSysInfoType1 = {
   6,    // Family String
 };
 CHAR8  *mSysInfoType1Strings[] = {
-  "Nintendo of America Inc.",
-  "Nintendo Switch",
-  "HAC-001",
+  "Google Inc.",
+  "Nexus 7",
+  "ME370T",
   "Unknown",
-  "HAC-001",
+  "ME370T",
   "Console",
   NULL
 };
@@ -181,9 +181,9 @@ SMBIOS_TABLE_TYPE2  mBoardInfoType2 = {
   { 0 }                     // ContainedObjectHandles[1];
 };
 CHAR8  *mBoardInfoType2Strings[] = {
-  "Nintendo of America Inc.",
-  "Nintendo Switch",
-  "HAC-001",
+  "Google Inc.",
+  "Nexus 7",
+  "ME370T",
   "Unknown",
   "",
   "",
@@ -212,7 +212,7 @@ SMBIOS_TABLE_TYPE3  mEnclosureInfoType3 = {
   { { 0 } },    // ContainedElements[1];
 };
 CHAR8  *mEnclosureInfoType3Strings[] = {
-  "Nintendo Switch",
+  "Nexus 7",
   "1",
   "Unknown",
   "",
@@ -304,8 +304,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4 = {
 CHAR8 *mProcessorInfoType4Strings[] = {
   "Socket",
   "NVIDIA Inc.",
-  "NVIDIA Tegra X1",
-  "Tegra210",
+  "NVIDIA Tegra 3",
+  "Tegra30",
   NULL
 };
 

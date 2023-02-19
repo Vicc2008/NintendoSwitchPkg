@@ -41,10 +41,10 @@
   Switch.c
   SwitchMem.c
 
-[Sources.AArch64]
+[Sources.Arm]
   ArmPlatformHelper.S
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-unused-function -Wno-unused-variable
 
 [FixedPcd]
